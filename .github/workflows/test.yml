@@ -135,6 +135,19 @@ jobs:
         if: matrix.build == 'x86_64-linux'
         run: cp target/debian/diplo_* dist/
 
+      - name: Run install pkgbuild
+        if: matrix.build == 'x86_64-linux'
+        uses: actions-rs/cargo@v1
+        with:
+          command: install
+          args: cargo-pkgbuild
+      - name: Make pkgbuild
+        if: matrix.build == 'x86_64-linux'
+        run: cargo pkgbuild
+      - name: cp pkgbuild
+        if: matrix.build == 'x86_64-linux'
+        run: mv PKGBUILD dist/
+
       - name: Build archive
         shell: bash
         run: |
@@ -143,7 +156,7 @@ jobs:
             ls
             ls target
             ls target/${{ matrix.target }}
-            
+
             cp "target/wix/diplo*" "dist/"
             cp "target/${{ matrix.target }}/release/$BIN_NAME.exe" "dist/"
           else
