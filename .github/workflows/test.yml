@@ -214,8 +214,11 @@ jobs:
               pkgname=$PROJECT_NAME-$platform
               mkdir tmp/$pkgname
               # cp LICENSE README.md tmp/$pkgname
+
               [ -f diplo* ] && mv diplo* dist/$pkgname
+              [ -f *.msi ] && mv *.msi dist/$pkgname
               [ -f PKGBUILD ] && mv PKGBUILD dist/$pkgname
+              
               mv diplo-$platform/$BIN_NAME$exe tmp/$pkgname
               chmod +x tmp/$pkgname/$BIN_NAME$exe
 
