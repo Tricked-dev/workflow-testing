@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false # don't fail other jobs if one fails
       matrix:
-        build: [x86_64-windows] #[x86_64-linux, aarch64-linux, x86_64-macos, x86_64-windows] #, x86_64-win-gnu, win32-msvc
+        build: [x86_64-windows, x86_64-linux] #[x86_64-linux, aarch64-linux, x86_64-macos, x86_64-windows] #, x86_64-win-gnu, win32-msvc
         include:
           # - build: x86_64-linux
           #   os: ubuntu-20.04
@@ -117,17 +117,6 @@ jobs:
         if: matrix.build == 'x86_64-windows'
         run: cargo wix
 
-      - name: Build archive
-        shell: bash
-        run: |
-          mkdir dist
-          if [ "${{ matrix.os }}" = "windows-2019" ]; then
-            cp "target/wix/diplo* dist/"
-            cp "target/${{ matrix.target }}/release/$BIN_NAME.exe" "dist/"
-          else
-            cp "target/${{ matrix.target }}/release/$BIN_NAME" "dist/"
-          fi
-
       - name: Run install cargo-deb
         if: matrix.build == 'x86_64-linux'
         uses: actions-rs/cargo@v1
@@ -140,6 +129,17 @@ jobs:
       - name: cp deb file
         if: matrix.build == 'x86_64-linux'
         run: cp target/debian/diplo_* dist/
+
+      - name: Build archive
+        shell: bash
+        run: |
+          mkdir dist
+          if [ "${{ matrix.os }}" = "windows-2019" ]; then
+            cp "target/wix/diplo*" "dist/"
+            cp "target/${{ matrix.target }}/release/$BIN_NAME.exe" "dist/"
+          else
+            cp "target/${{ matrix.target }}/release/$BIN_NAME" "dist/"
+          fi
 
       # - name: Run install pkgbuild
       #   if: matrix.build == 'x86_64-linux'
