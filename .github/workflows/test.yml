@@ -147,6 +147,10 @@ jobs:
       - name: cp pkgbuild
         if: matrix.build == 'x86_64-linux'
         run: mv PKGBUILD dist/
+      - name: a
+        run: ls target
+      - name: a
+        run: ls target/${{ matrix.target }}
 
       - name: Build archive
         shell: bash
@@ -156,8 +160,7 @@ jobs:
             ls target
             ls target/${{ matrix.target }}
 
-            [ -f "target/wix/diplo-*" ] cp "target/wix/diplo-*" "dist/"
-            [ -f "target/${{ matrix.target }}/wix/diplo-*" ] cp "target/${{ matrix.target }}/wix/diplo-*" "dist/"
+
 
             cp "target/${{ matrix.target }}/release/$BIN_NAME.exe" "dist/"
           else
