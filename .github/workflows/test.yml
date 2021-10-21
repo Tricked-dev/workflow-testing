@@ -153,13 +153,12 @@ jobs:
         run: |
 
           if [ "${{ matrix.os }}" = "windows-2019" ]; then
-            ls
             ls target
             ls target/${{ matrix.target }}
 
             [ -f target/wix/diplo-* ] cp "target/wix/diplo-*" "dist/"
             [ -f target/${{ matrix.target }}/wix/diplo-* ] cp "target/${{ matrix.target }}/wix/diplo-*" "dist/"
-            
+
             cp "target/${{ matrix.target }}/release/$BIN_NAME.exe" "dist/"
           else
             cp "target/${{ matrix.target }}/release/$BIN_NAME" "dist/"
@@ -180,7 +179,7 @@ jobs:
 
       - uses: actions/upload-artifact@v2.2.4
         with:
-          name: bins-${{ matrix.build }}
+          name: diplo-${{ matrix.build }}
           path: dist
 
   publish:
@@ -198,7 +197,7 @@ jobs:
         # with:
         #   path: dist
       # - run: ls -al ./dist
-      - run: ls -al bins-*
+      - run: ls -al diplo-*
 
       - name: Calculate tag name
         run: |
@@ -220,8 +219,8 @@ jobs:
           mkdir dist
 
 
-          for dir in bins-* ; do
-              platform=${dir#"bins-"}
+          for dir in diplo-* ; do
+              platform=${dir#"diplo-"}
               if [[ $platform =~ "windows" ]]; then
                   exe=".exe"
               fi
