@@ -156,8 +156,8 @@ jobs:
             ls target
             ls target/${{ matrix.target }}
 
-            [ -f target/wix/diplo-* ] cp "target/wix/diplo-*" "dist/"
-            [ -f target/${{ matrix.target }}/wix/diplo-* ] cp "target/${{ matrix.target }}/wix/diplo-*" "dist/"
+            [ -f "target/wix/diplo-*" ] cp "target/wix/diplo-*" "dist/"
+            [ -f "target/${{ matrix.target }}/wix/diplo-*" ] cp "target/${{ matrix.target }}/wix/diplo-*" "dist/"
 
             cp "target/${{ matrix.target }}/release/$BIN_NAME.exe" "dist/"
           else
