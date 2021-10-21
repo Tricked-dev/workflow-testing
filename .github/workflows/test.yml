@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false # don't fail other jobs if one fails
       matrix:
-        build: [x86_64-linux, aarch64-linux, x86_64-macos, x86_64-windows] #, x86_64-win-gnu, win32-msvc
+        build: [x86_64-windows] #[x86_64-linux, aarch64-linux, x86_64-macos, x86_64-windows] #, x86_64-win-gnu, win32-msvc
         include:
           # - build: x86_64-linux
           #   os: ubuntu-20.04
@@ -97,21 +97,21 @@ jobs:
             /target/${{ matrix.target }}/release/$BIN_NAME
 
       - name: Install Wix
-        if: matrix.os == "windows-2019"
+        if: matrix.build == "x86_64-windows"
         uses: actions/checkout@v2
         with:
           repository: fbarresi/wix
           path: wix
       - name: Setup .NET Core
-        if: matrix.os == "windows-2019"
+        if: matrix.build == "x86_64-windows"
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.1.101
       - name: install cargo wix
-        if: matrix.os == "windows-2019"
+        if: matrix.build == "x86_64-windows"
         run: cargo install cargo-wix
       - name: run wix command
-        if: matrix.os == "windows-2019"
+        if: matrix.build == "x86_64-windows"
         run: cargo wix
 
       - name: Build archive
