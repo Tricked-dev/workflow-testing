@@ -112,6 +112,9 @@ jobs:
         run: cargo install cargo-wix
       - name: run wix command
         if: matrix.build == 'x86_64-windows'
+        run: cargo wix init
+      - name: run wix command
+        if: matrix.build == 'x86_64-windows'
         run: cargo wix
 
       - name: Build archive
