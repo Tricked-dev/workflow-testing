@@ -162,7 +162,7 @@ jobs:
             ls target/${{ matrix.target }}
 
 
-            cp "target/wix/diplo*" "dist/"
+            cp target/wix/diplo* dist/
             cp "target/${{ matrix.target }}/release/$BIN_NAME.exe" "dist/"
           else
             cp "target/${{ matrix.target }}/release/$BIN_NAME" "dist/"
