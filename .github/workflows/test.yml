@@ -235,7 +235,7 @@ jobs:
               [ -f diplo_* ] && mv diplo_* tmp/$pkgname
               [ -f diplo-* ] && mv diplo-* tmp/$pkgname
               [ -f PKGBUILD ] && mv PKGBUILD tmp/$pkgname
-              mv bins-$platform/$BIN_NAME$exe tmp/$pkgname
+              mv diplo-$platform/$BIN_NAME$exe tmp/$pkgname
               chmod +x tmp/$pkgname/$BIN_NAME$exe
 
               if [ "$exe" = "" ]; then
