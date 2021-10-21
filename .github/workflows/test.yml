@@ -97,21 +97,21 @@ jobs:
             /target/${{ matrix.target }}/release/$BIN_NAME
 
       - name: Install Wix
-        if: matrix.build == "x86_64-windows"
+        if: matrix.build == 'x86_64-windows'
         uses: actions/checkout@v2
         with:
           repository: fbarresi/wix
           path: wix
       - name: Setup .NET Core
-        if: matrix.build == "x86_64-windows"
+        if: matrix.build == 'x86_64-windows'
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 3.1.101
       - name: install cargo wix
-        if: matrix.build == "x86_64-windows"
+        if: matrix.build == 'x86_64-windows'
         run: cargo install cargo-wix
       - name: run wix command
-        if: matrix.build == "x86_64-windows"
+        if: matrix.build == 'x86_64-windows'
         run: cargo wix
 
       - name: Build archive
