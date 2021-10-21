@@ -148,9 +148,9 @@ jobs:
         if: matrix.build == 'x86_64-linux'
         run: mv PKGBUILD dist/
       - name: a
-        run: ls target
-      - name: a
-        run: ls target/${{ matrix.target }}
+        run: ls target/wix
+      # - name: a
+      #   run: ls target/${{ matrix.target }}
 
       - name: Build archive
         shell: bash
