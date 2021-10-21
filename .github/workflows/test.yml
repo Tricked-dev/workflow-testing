@@ -117,15 +117,20 @@ jobs:
         if: matrix.build == 'x86_64-windows'
         run: cargo wix
 
+      - name: make dist
+        run: mkdir dist
+
       - name: Run install cargo-deb
         if: matrix.build == 'x86_64-linux'
         uses: actions-rs/cargo@v1
         with:
           command: install
           args: cargo-deb
+
       - name: Create deb file
         if: matrix.build == 'x86_64-linux'
         run: cargo deb
+
       - name: cp deb file
         if: matrix.build == 'x86_64-linux'
         run: cp target/debian/diplo_* dist/
@@ -133,7 +138,7 @@ jobs:
       - name: Build archive
         shell: bash
         run: |
-          mkdir dist
+
           if [ "${{ matrix.os }}" = "windows-2019" ]; then
             cp "target/wix/diplo*" "dist/"
             cp "target/${{ matrix.target }}/release/$BIN_NAME.exe" "dist/"
