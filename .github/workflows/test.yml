@@ -147,11 +147,6 @@ jobs:
       - name: cp pkgbuild
         if: matrix.build == 'x86_64-linux'
         run: mv PKGBUILD dist/
-      - name: a
-        if: matrix.build == 'x86_64-windows'
-        run: ls target/wix
-      # - name: a
-      #   run: ls target/${{ matrix.target }}
 
       - name: Build archive
         shell: bash
@@ -167,19 +162,6 @@ jobs:
           else
             cp "target/${{ matrix.target }}/release/$BIN_NAME" "dist/"
           fi
-
-      # - name: Run install pkgbuild
-      #   if: matrix.build == 'x86_64-linux'
-      #   uses: actions-rs/cargo@v1
-      #   with:
-      #     command: install
-      #     args: cargo-pkgbuild
-      # - name: Make pkgbuild
-      #   if: matrix.build == 'x86_64-linux'
-      #   run: cargo pkgbuild
-      # - name: cp pkgbuild
-      #   if: matrix.build == 'x86_64-linux'
-      #   run: mv PKGBUILD dist/
 
       - uses: actions/upload-artifact@v2.2.4
         with:
@@ -232,8 +214,8 @@ jobs:
               pkgname=$PROJECT_NAME-$platform
               mkdir tmp/$pkgname
               # cp LICENSE README.md tmp/$pkgname
-              [ -f diplo* ] && mv diplo* tmp/$pkgname
-              [ -f PKGBUILD ] && mv PKGBUILD tmp/$pkgname
+              [ -f diplo* ] && mv diplo* dist/$pkgname
+              [ -f PKGBUILD ] && mv PKGBUILD dist/$pkgname
               mv diplo-$platform/$BIN_NAME$exe tmp/$pkgname
               chmod +x tmp/$pkgname/$BIN_NAME$exe
 
