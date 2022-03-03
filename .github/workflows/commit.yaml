@@ -12,5 +12,6 @@ jobs:
   build_windows:
     runs-on: windows-latest
     steps:
-      - run: ls "C:\Program Files (x86)\Microsoft Visual Studio"
+      - run: ls "C:\Program Files (x86)\Microsoft Visual Studio\Shared"
+      - run: ls "C:\Program Files (x86)\Microsoft Visual Studio\Installer"
       # - uses: actions/checkout@v2
