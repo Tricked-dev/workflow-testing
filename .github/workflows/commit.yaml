@@ -12,5 +12,5 @@ jobs:
   build_windows:
     runs-on: windows-latest
     steps:
-      - run: ls "C:\Program Files (x86)"
+      - run: ls "C:\Program Files (x86)\Microsoft Visual Studio"
       # - uses: actions/checkout@v2
